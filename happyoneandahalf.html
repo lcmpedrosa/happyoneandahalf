@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossos primeiros 1 ano e 6 meses ❤️</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background: linear-gradient(180deg, #fff0f6, #faf7fb);
+            color: #333;
+            overflow-x: hidden
+        }
+
+        header {
+            background: linear-gradient(135deg, #ff6fa5, #ff9ac1);
+            color: white;
+            text-align: center;
+            padding: 80px 20px 60px
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.7rem
+        }
+
+        .subtitle {
+            margin-top: 10px;
+            font-size: 1.1rem
+        }
+
+        .counter {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: 600
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 20px
+        }
+
+        .timeline::after {
+            content: "";
+            position: absolute;
+            width: 4px;
+            background: #ff9ac1;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px
+        }
+
+        .card {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all .8s ease
+        }
+
+        .card.show {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        .card.left {
+            left: 0
+        }
+
+        .card.right {
+            left: 50%
+        }
+
+        .card::after {
+            content: "";
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            right: -9px;
+            background: white;
+            border: 4px solid #ff6fa5;
+            top: 18px;
+            border-radius: 50%;
+            z-index: 2
+        }
+
+        .card.right::after {
+            left: -9px
+        }
+
+        .content {
+            background: white;
+            padding: 15px;
+            border-radius: 14px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+            cursor: pointer
+        }
+
+        .content img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px
+        }
+
+        .date {
+            font-size: .8rem;
+            color: #888;
+            margin-bottom: 6px
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            color: #777
+        }
+
+        /* Lightbox */
+
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .85);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 999
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 12px
+        }
+
+        /* Floating hearts */
+
+        .heart {
+            position: fixed;
+            color: #ff6fa5;
+            font-size: 20px;
+            animation: floatUp 6s linear infinite;
+            pointer-events: none
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1
+            }
+
+            100% {
+                transform: translateY(-100vh) scale(1.8);
+                opacity: 0
+            }
+        }
+
+        /* Mobile */
+
+        @media screen and (max-width:768px) {
+            .timeline::after {
+                left: 20px
+            }
+
+            .card {
+                width: 100%;
+                padding-left: 55px;
+                padding-right: 25px
+            }
+
+            .card.right {
+                left: 0
+            }
+
+            .card::after {
+                left: 11px
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Nossa História</h1>
+        <p class="subtitle">Uma linha do tempo do nosso amor ❤️</p>
+
+        <div class="counter" id="counter"></div>
+
+    </header>
+
+    <section class="timeline" id="timeline"></section>
+
+    <footer>
+        <p>Feito com ❤️ para celebrar nosso aniversário</p>
+    </footer>
+
+    <!-- Carta final -->
+    <section style="text-align:center;margin:80px 20px;">
+        <h2>Uma última coisa para você ❤️</h2>
+
+        <div class="envelope" id="envelope">
+            <div class="flap"></div>
+            <div class="letter" id="letter">
+                <h3>Para você</h3>
+                <p>
+                    Desde o dia em que começamos essa história,
+                    minha vida ficou mais leve, mais divertida
+
+                    E cada momento ao seu lado virou uma memória
+                    que eu guardo com carinho.
+
+                    Essa timeline mostra alguns momentos...
+                    mas o melhor de todos ainda é
+                    continuar escrevendo essa história
+                    com você.
+
+                    ❤️
+                </p>
+            </div>
+        </div>
+
+        <p style="margin-top:20px;color:#888">Clique no envelope</p>
+    </section>
+
+    <style>
+        .envelope {
+            width: 260px;
+            height: 180px;
+            margin: 40px auto;
+            position: relative;
+            perspective: 1000px;
+            cursor: pointer
+        }
+
+        .flap {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #ff6fa5;
+            clip-path: polygon(0 0, 100% 0, 50% 60%);
+            transform-origin: top;
+            transition: transform 1s;
+            border-radius: 8px 8px 0 0
+        }
+
+        .letter {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .2);
+            transform: translateY(60%);
+            transition: transform 1s;
+            border-radius: 8px;
+            text-align: left;
+            overflow: auto
+        }
+
+        .envelope.open .flap {
+            transform: rotateX(180deg)
+        }
+
+        .envelope.open .letter {
+            transform: translateY(-20%)
+        }
+
+        .letter h3 {
+            margin-top: 0;
+            color: #ff6fa5
+        }
+    </style>
+
+    <div class="lightbox" id="lightbox">
+        <img id="lightboxImg">
+    </div>
+
+    <audio autoplay loop>
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+
+        /* Relationship counter */
+
+        const startDate = new Date("2024-09-21");
+
+        function updateCounter() {
+
+            const now = new Date();
+
+            const diff = now - startDate;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+            const counter = document.getElementById("counter");
+
+            counter.innerHTML = `Estamos juntos há <b>${days}</b> dias ❤️`;
+        }
+
+        updateCounter();
+
+        /* Memories data */
+
+        const memories = [
+            { date: "Data 01", img: "fotos/foto01.jpg", text: "Primeiro momento especial." },
+            { date: "Data 02", img: "fotos/foto02.jpg", text: "Outro momento inesquecível." },
+            { date: "Data 03", img: "fotos/foto03.jpg", text: "Memória especial." },
+            { date: "Data 04", img: "fotos/foto04.jpg", text: "Memória especial." },
+            { date: "Data 05", img: "fotos/foto05.jpg", text: "Memória especial." },
+            { date: "Data 06", img: "fotos/foto06.jpg", text: "Memória especial." },
+            { date: "Data 07", img: "fotos/foto07.jpg", text: "Memória especial." },
+            { date: "Data 08", img: "fotos/foto08.jpg", text: "Memória especial." },
+            { date: "Data 09", img: "fotos/foto09.jpg", text: "Memória especial." },
+            { date: "Data 10", img: "fotos/foto10.jpg", text: "Memória especial." },
+            { date: "Data 11", img: "fotos/foto11.jpg", text: "Memória especial." },
+            { date: "Data 12", img: "fotos/foto12.jpg", text: "Memória especial." },
+            { date: "Data 13", img: "fotos/foto13.jpg", text: "Memória especial." },
+            { date: "Data 14", img: "fotos/foto14.jpg", text: "Memória especial." },
+            { date: "Data 15", img: "fotos/foto15.jpg", text: "Memória especial." },
+            { date: "Data 16", img: "fotos/foto16.jpg", text: "Memória especial." },
+            { date: "Data 17", img: "fotos/foto17.jpg", text: "Memória especial." },
+            { date: "Data 18", img: "fotos/foto18.jpg", text: "Memória especial." },
+            { date: "Data 19", img: "fotos/foto19.jpg", text: "Memória especial." },
+            { date: "Data 20", img: "fotos/foto20.jpg", text: "Memória especial." },
+            { date: "Data 21", img: "fotos/foto21.jpg", text: "Nosso momento mais recente ❤️" }
+        ];
+
+        const timeline = document.getElementById("timeline");
+
+        memories.forEach((m, i) => {
+
+            const side = i % 2 === 0 ? "left" : "right";
+
+            const card = document.createElement("div");
+            card.className = "card " + side;
+
+            card.innerHTML = `
+<div class="content">
+<div class="date">${m.date}</div>
+<img loading="lazy" src="${m.img}" alt="memoria">
+<p>${m.text}</p>
+</div>`;
+
+            timeline.appendChild(card);
+        });
+
+        /* Scroll animation */
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                }
+            });
+        }, { threshold: .15 });
+
+        document.querySelectorAll(".card").forEach(card => observer.observe(card));
+
+        /* Lightbox */
+
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightboxImg");
+
+        document.addEventListener("click", e => {
+
+            if (e.target.tagName === "IMG" && e.target.closest(".content")) {
+                lightbox.style.display = "flex";
+                lightboxImg.src = e.target.src;
+            }
+
+            if (e.target === lightbox) {
+                lightbox.style.display = "none";
+            }
+
+        });
+
+        /* Floating hearts */
+
+        function createHeart() {
+
+            const heart = document.createElement("div");
+            heart.className = "heart";
+            heart.innerHTML = "❤";
+
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.bottom = "-20px";
+
+            heart.style.fontSize = (15 + Math.random() * 20) + "px";
+
+            heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 7000);
+
+        }
+
+        setInterval(createHeart, 800);
+
+        /* Envelope animation */
+
+        const envelope = document.getElementById("envelope");
+
+        if (envelope) {
+
+            envelope.addEventListener("click", () => {
+
+                envelope.classList.toggle("open");
+
+            });
+
+        }
+
+    </script>
+
+</body>
+
+</html>
